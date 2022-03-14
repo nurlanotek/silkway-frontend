@@ -1,0 +1,50 @@
+.myarea{
+
+  &__nav{
+    width: 300px;
+    height: 100vh;
+    background-color: #243141;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 80px 0;
+  }
+
+  &__ul{
+    color: #fff;
+
+  }
+
+  &__li{
+    background-color: #ffffff10;
+    padding: 10px 0 10px  40px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: left;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+
+  &__li:hover {
+    background-color: #5d8cff30;
+  }
+
+    &__li:first-child {
+    margin-top: 20px;
+  }
+
+    &__first-li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+      margin-bottom: 20px;
+  }
+
+  &__person{
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 10px;
+
+  }
+}

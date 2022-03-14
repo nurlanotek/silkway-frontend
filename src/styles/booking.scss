@@ -1,0 +1,103 @@
+.booking{
+  background: url("../images/bg1.svg") center/cover no-repeat;
+  height: 656px;
+  padding: 112px 64px;
+  position: relative;
+
+  &__title{
+    font-family: Open Sans, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 80px;
+    text-align: left;
+    /* or 125% */
+    margin-bottom: 34px;
+
+
+    color: #fff;
+  }
+
+  &__subtitle{
+    font-family: Open Sans, sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 32px;
+    text-align: left;
+    font-weight: bold;
+
+    /* or 160% */
+
+    color: #fff;
+  }
+
+  &__form{
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+    margin-top: 68px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__label{
+    display: block;
+  }
+
+  &__el{
+    width: 20%;
+    padding: 18px ;
+    text-align: left;
+    display: flex;
+    border-right: 1px solid #00000015;
+  }
+
+  &__el:first-child {
+    padding-left: 30px;
+  }
+
+    &__el:nth-child(4) {
+    border-right: 0;
+
+  }
+
+    &__input{
+    border: none;
+    //border-bottom: 1px solid #00000020;
+    outline: none;
+    width: 120px;
+  }
+
+  &__el:last-child{
+    //background-color: lightskyblue;
+    position: relative;
+  }
+  
+  &__btn{
+    color: #fff;
+    background-color: #24AB70;
+    border: none;
+    height: 80px;
+    border-radius: 280px;
+    width: 120%;
+    position: absolute;
+    bottom: 0;
+    right: -20px;
+    cursor: pointer;
+  }
+
+  &__btn:hover {
+    background-color: #1ba2ab;
+  }
+
+
+  &__icon{
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  }
+
+input{
+}

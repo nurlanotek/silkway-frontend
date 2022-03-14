@@ -1,11 +1,44 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-import {Routes, Route, Link} from 'react-router-dom'
-import News from "./News";
-import Home from "./Home";
+import {Link, useNavigate} from 'react-router-dom'
+
 import logo from "../images/logo.svg"
+import {changeIsLogin, changeMenuStatus} from "../redux/reducer/visReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {IoPersonCircle} from "react-icons/io5";
+import {logoutUser} from "../redux/reducer/authReducer";
+
+import { AiOutlineMenu } from "react-icons/ai";
+import {TiTimesOutline} from "react-icons/ti";
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isMenuShown = useSelector(state=>state.store.isMenuShown);
+
+    const logout =()=>{
+        let refresh = localStorage.getItem('REFRESH')
+        let payload = {
+            "refresh": refresh.slice(1, (refresh.length-1))
+        };
+        console.log(payload)
+        dispatch(logoutUser(payload));
+        localStorage.clear();
+        window.location.reload(false);
+    }
+    useEffect(()=>{
+
+    },[localStorage]);
+
+    const goMyArea =()=>{
+        navigate('/my-area');
+    };
+
+    const showSmallMenu  =()=>{
+        dispatch(changeMenuStatus());
+        document.getElementById('small-menu').style.display ='flex';
+    }
+
     return (
         <div className="header">
             <div className="container">
@@ -13,14 +46,13 @@ const Header = () => {
                 <img src={logo} alt="logo" className="header__logo"/>
 
                 <ul className="header__ul">
-                    <li><Link  className="header__li" to='/' >Home</Link></li>
-                    <li><a  className="header__li" href="#">Hotels</a></li>
-                    <li><a className="header__li" href="#">About us</a></li>
-                    <li><Link className="header__li" to='/news' >News</Link></li>
-                    <li><a className="header__li" href="#">Contact</a></li>
+                    <li><Link  className="header__li" to='/' >Главная</Link></li>
+                    <li><a  className="header__li" href="/hotels">Отели</a></li>
+                    <li><a className="header__li" href="#"> О нас</a></li>
+                    <li><Link className="header__li" to='/news' >Новости</Link></li>
+                    <li><a className="header__li" href="#">Контакты</a></li>
 
                 </ul>
-
                 <div className="header__left-div">
                     <select className="header__select" name="lang" id="lang">
                         <option value="RU">RU</option>
@@ -34,18 +66,34 @@ const Header = () => {
                         <option value="ENG">UZS</option>
                     </select>
 
-                    <button className="header__login-btn">LOGIN</button>
+                    <button className="header__my-area"
+                            style={{display : localStorage.getItem('USER') ? 'block' : 'none'}}
+                            onClick={()=>goMyArea()}
+                    >
+                        <IoPersonCircle className="header__my-area-icon"/>
+                    </button>
+
+                    <button className="header__login-btn"
+                            style={{display : localStorage.getItem('USER') ? 'none' : 'block'}}
+                            onClick={()=>dispatch(changeIsLogin())}>Войти</button>
+
+                    <button className="header__login-btn"
+                            style={{display : localStorage.getItem('USER') ? 'block' : 'none'}}
+                            onClick={()=>logout()}>Выйти</button>
+
+
+
                 </div>
+
+
+                <button className="header__burger-btn" onClick={()=>showSmallMenu()}>{!isMenuShown ? <AiOutlineMenu className="header__burger-icon"/> :
+                <TiTimesOutline className="header__burger-icon"/>}</button>
 
             </nav>
 
 
-            <Routes>
-                <Route exact path="/" element={<Home/>}/>
-                <Route path="/news" element={<News/>}/>
-
-            </Routes>
             </div>
+
         </div>
     );
 };

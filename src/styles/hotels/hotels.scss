@@ -1,0 +1,22 @@
+.hotels{
+  display: flex !important;
+  position: relative;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+
+  &__filters{
+    width: 25%;
+    height: 100vh;
+    padding: 10px ;
+    background-color: #fff;
+  }
+
+  &__cards{
+    width: 75%;
+    padding: 10px  0 0 30px;
+    display: flex;
+    flex-direction: column;
+
+  }
+}

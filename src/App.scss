@@ -52,4 +52,34 @@
   }
 }
 
+.loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  height: 80px;
+  width: 80px;
+}
+
 @import "./src/styles/header";
+@import "./src/styles/booking";
+@import "./src/styles/besthotels";
+@import "./src/styles/card";
+@import "./src/styles/facilities";
+@import "./src/styles/map";
+@import "./src/styles/contact";
+@import "./src/styles/footer";
+@import "./src/styles/login";
+@import "./src/styles/resetPass";
+@import "./src/styles/signup";
+@import "./src/styles/registration/entity";
+@import "./src/styles/registration/property";
+@import "./src/styles/hotels/hotelCard";
+@import "./src/styles/hotels/hotels";
+@import "./src/styles/hotels/filterBlock";
+@import "./src/styles/hotels/filter";
+@import "./src/styles/myarea";
+
+@import "./src/styles/media";
+

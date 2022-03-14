@@ -1,0 +1,74 @@
+.hotelCard{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 260px;
+  background-color: #fff;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 10px;
+
+
+  &__img{
+    width: 30%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  &__text-content{
+    width: 70%;
+    padding: 25px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  &__name-star{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__title{
+    font-family: Open Sans, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19.9619px;
+    line-height: 30px;
+    color: #518EF8;
+  }
+
+  &__raiting{
+    height: 20px;
+}
+
+  &__address{
+    font-family: Open Sans, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14.9714px;
+    line-height: 17px;
+    color: #518EF8;
+  }
+
+  &__description{
+    margin: 20px 0;
+  }
+
+  &__bottom-sec{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 50px;
+  }
+
+  &__more-btn{
+    width: 120px;
+    height: 30px;
+    background-color: #FEE87C;
+    border-radius: 2px;
+    color: #222222;
+    border: none;
+    cursor: pointer;
+  }
+}
