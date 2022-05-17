@@ -10,6 +10,7 @@ import {
     signUp
 } from "../../redux/reducer/authReducer";
 import HotelCard from "../hotels_page/HotelCard";
+import translate from "../../i18n/translate";
 
 const Individual = () => {
     const dispatch = useDispatch();
@@ -85,7 +86,7 @@ const Individual = () => {
 
     return (
         <div style={{display: showIndividual ? 'block' : 'none'}}>
-            <h3 className="signup__ind-title">Регистрация для физического лица</h3>
+            <h3 className="signup__ind-title">{translate('Регистрация для физического лица')}</h3>
             <form className="signup__user-form">
                 <img src={require("../../images/loading.gif")} alt="loading..."
                      style={{display: loading ? 'block' : 'none'}}
@@ -101,12 +102,12 @@ const Individual = () => {
                     <input required type="email" placeholder="email" className="signup__input" value={data.email}
                            name="email"
                            onChange={changeHandler}/>
-                    <input required type="text" placeholder="пароль" className="signup__input" value={data.password}
+                    <input required type="text" placeholder="password" className="signup__input" value={data.password}
                            name="password" onChange={changeHandler}/>
                 </div>
 
                 <div className="signup__btn-div">
-                    <button onClick={(e) => sendData(e)} type={'submit'} className="signup__btn">Регистрация</button>
+                    <button onClick={(e) => sendData(e)} type={'submit'} className="signup__btn">{translate('Регистрация')}</button>
 
                 </div>
             </form>
@@ -118,14 +119,14 @@ const Individual = () => {
                 <form className="signup__code-div">
                     <input type="text" className="signup__code-input" placeholder="введите код" id='code'/>
                     <button type="submit" className="signup__btn signup__confirm-btn"
-                    onClick={(e)=>emailVerify(e)}>Подтвердить</button>
+                    onClick={(e)=>emailVerify(e)}>{translate('Подтвердить')}</button>
                 </form>
 
             </div>
             <div className="signup__ver-message-div" style={{display : verifyMessage.length ? 'block' : 'none',}}>
                 <p style={{color: 'green'}}>{verifyMessage}</p>
                 <button className="signup__home-btn"
-                onClick={()=>redirectHome()}> Вернуться на главную</button>
+                onClick={()=>redirectHome()}>{translate('Вернуться на главную')}</button>
 
             </div>
 

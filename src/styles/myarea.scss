@@ -1,6 +1,9 @@
-.myarea{
+.myarea {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
-  &__nav{
+  &__nav {
     width: 300px;
     height: 100vh;
     background-color: #243141;
@@ -10,14 +13,14 @@
     padding: 80px 0;
   }
 
-  &__ul{
+  &__ul {
     color: #fff;
 
   }
 
-  &__li{
+  &__li {
     background-color: #ffffff10;
-    padding: 10px 0 10px  40px;
+    padding: 10px 0 10px 40px;
     display: flex;
     align-items: center;
     align-content: center;
@@ -30,21 +33,43 @@
     background-color: #5d8cff30;
   }
 
-    &__li:first-child {
+  &__li:first-child {
     margin-top: 20px;
   }
 
-    &__first-li{
+  &__first-li {
     display: flex;
     flex-direction: column;
     justify-content: center;
-      margin-bottom: 20px;
+    margin-bottom: 20px;
   }
 
-  &__person{
+  &__person {
     width: 70px;
     height: 70px;
     margin: 0 auto 10px;
 
+  }
+
+  &__bookings {
+    width: 100%;
+    height: 100vh;
+    margin-left: 300px;
+    padding: 15px 30px;
+
+  }
+
+  &__booking{
+    width: 100%;
+    border: 1px solid #00000020;
+    padding: 10px 20px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  &__hotel-name{
+    margin-bottom: 10px;
+  }
+  &__bold{
+    font-weight: bold;
   }
 }

@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {changeIsLogin, changeMenuStatus, setMenuStatus} from "../redux/reducer/visReducer";
+import {changeIsLogin, setMenuStatus} from "../redux/reducer/visReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUser} from "../redux/reducer/authReducer";
-
-import {IoPersonCircle} from "react-icons/io5";
+import {LOCALES} from "../i18n"
+import {setLocale} from "../redux/reducer/lanReducer";
+import translate from "../i18n/translate";
 
 
 const SmallMenu = () => {
@@ -32,15 +33,32 @@ const SmallMenu = () => {
         navigate('/my-area');
     };
 
-    const isMenuShown = useSelector(state=>state.store.isMenuShown);
+    const isMenuShown = useSelector(state => state.store.isMenuShown);
 
-    const changeMenuStatus  =(str)=>{
+    const changeMenuStatus = (str) => {
         // dispatch(changeMenuStatus());
         dispatch(setMenuStatus(false));
-        document.getElementById('small-menu').style.display ='none';
+        document.getElementById('small-menu').style.display = 'none';
         navigate(str);
     };
 
+
+    const locale = useSelector(state => state.lanReducer.locale);
+    const languageHandler = (e) => {
+        if (e.target.value === 'RU') {
+            localStorage.setItem('lan', 'ru');
+            document.getElementById('lang').value = 'RU';
+
+            dispatch(setLocale(LOCALES.RUSSIAN))
+        } else {
+            localStorage.setItem('lan', 'en');
+            dispatch(setLocale(LOCALES.ENGLISH))
+            document.getElementById('lang').value = 'ENG';
+
+
+        }
+
+    };
 
 
     return (
@@ -51,7 +69,9 @@ const SmallMenu = () => {
             <div className="header__left-div-small">
 
                 <div className="header__selects">
-                    <select className="header__select" name="lang" id="lang">
+                    <select className="header__select" name="lang" id="lang-small"
+                            onChange={(e) => languageHandler(e)}
+                    >
                         <option value="RU">RU</option>
                         <option value="ENG">ENG</option>
                     </select>
@@ -65,17 +85,17 @@ const SmallMenu = () => {
                 </div>
 
 
-
-
             </div>
 
 
             <ul className="header__ul-small">
-                <li onClick={()=>changeMenuStatus('/')}><Link className="header__li" to='/'>Главная</Link></li>
-                <li onClick={()=>changeMenuStatus('/hotels')}><a className="header__li" href="/hotels">Отели</a></li>
-                <li onClick={()=>changeMenuStatus('#')}><a className="header__li" href="#"> О нас</a></li>
-                <li onClick={()=>changeMenuStatus('/news')}><Link className="header__li" to='/news'>Новости</Link></li>
-                <li onClick={()=>changeMenuStatus('/#')}><a className="header__li" href="#">Контакты</a></li>
+                <li onClick={() => changeMenuStatus('/')}><Link className="header__li" to='/'>{translate('Главная')}</Link></li>
+                <li onClick={() => changeMenuStatus('/hotels')}><a className="header__li" href="/hotels">{translate('Отели')}</a></li>
+                <li onClick={() => changeMenuStatus('#')}><a className="header__li" href="#">{translate('О нас')}</a></li>
+                <li onClick={() => changeMenuStatus('/news')}><Link className="header__li" to='/news'>{translate('Новости')}</Link>
+                </li>
+                <li onClick={() => changeMenuStatus('/#')}><a className="header__li" href="#">{translate('Контакты')}</a></li>
+                <li onClick={() => changeMenuStatus('/patners')}><a className="header__li" href="/patners">{translate('Партнерам')}</a></li>
 
             </ul>
 
@@ -83,24 +103,24 @@ const SmallMenu = () => {
             <div className="header__btns">
                 <button className="header__login-btn-small"
                         style={{display: localStorage.getItem('USER') ? 'none' : 'block'}}
-                        onClick={() => dispatch(changeIsLogin())}>Войти
+                        onClick={() => dispatch(changeIsLogin())}>{translate('Войти')}
                 </button>
 
                 <button className="header__login-btn-small"
-                        onClick={()=>changeMenuStatus('/')}
+                        onClick={() => changeMenuStatus('/')}
                         style={{display: localStorage.getItem('USER') ? 'block' : 'none'}}
-                        onClick={() => logout()}>Выйти
+                        onClick={() => logout()}>{translate('Выйти')}
                 </button>
 
                 <button className="header__login-btn-small"
-                        onClick={()=>changeMenuStatus('/my-area')}
+                        onClick={() => changeMenuStatus('/my-area')}
                         style={{display: localStorage.getItem('USER') ? 'block' : 'none'}}
-                        // onClick={() => goMyArea()}
-                    >
-                    Мой профиль
+                    // onClick={() => goMyArea()}
+                >
+                    {translate('Мой профиль')}
+
                 </button>
             </div>
-
 
 
         </div>

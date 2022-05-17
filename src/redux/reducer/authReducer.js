@@ -11,11 +11,16 @@ const DELETE_EMPTY_FIELDS_MSG = 'DELETE_EMPTY_FIELDS_MSG';
 const CONFIRM_DATA_FOR_PROPERTY = 'CONFIRM_DATA_FOR_PROPERTY';
 const SUCCESS_PROPERTY = 'SUCCESS_PROPERTY';
 const CHANGE_LOADING = 'CHANGE_LOADING';
-const EMAIL_VERIFICATION = 'EMAIL_VERIFICATION'
-const DELETE_EMAIL_VERIFICATION = 'DELETE_EMAIL_VERIFICATION'
+const EMAIL_VERIFICATION = 'EMAIL_VERIFICATION';
+const DELETE_EMAIL_VERIFICATION = 'DELETE_EMAIL_VERIFICATION';
 
-const LOGIN = 'LOGIN'
+const LOGIN = 'LOGIN';
+const RESET_PASSWORD = 'RESET_PASSWORD';
 
+const link = process.env.REACT_APP_MAIN_API;
+
+
+// const {REACT_APP_MAIN_API} = process.env
 
 
 const initialState = {
@@ -162,7 +167,10 @@ export default (state = initialState, action) => {
 // action creator - асинх
 export const signUp = (payload,) => {
     return (dispatch) => {
-        axios.post("https://silk-travel.herokuapp.com/authe/register/", payload)
+
+
+            // axios.post(`${link}authe/register/`, payload)
+            axios.post(` http://silk-travel.herokuapp.com/ru/authe/register/`, payload)
             .then(({data}) => {
                 console.log(JSON.stringify(data))
                 dispatch({type: REGISTRATION, payload: data});
@@ -184,7 +192,7 @@ export const signUp = (payload,) => {
 };
 
 export const getToken = (data) => (dispatch) => {
-    axios.post('https://silk-travel.herokuapp.com/authe/token/obtain/', data)
+    axios.post(`${link}authe/token/obtain/`, data)
         .then(({data}) => {
             console.log(data);
             dispatch({type: SAVE_TOKEN, payload: data})
@@ -212,7 +220,7 @@ export const deleteMsgForEmpty = () => ({
 export const regConfirmProperty = (data) => (dispatch) => {
     console.log("function 2");
 
-    axios.post('https://silk-travel.herokuapp.com/authe/request-to-register/', data)
+    axios.post(`${link}authe/request-to-register/`, data)
         .then(({data}) => {
             if (data === 'Sent') {
                 console.log(data);
@@ -233,7 +241,7 @@ export const confirmEmail = (code) => {
     let access = localStorage.getItem("ACCESS");
     access = access.slice(1, (access.length - 1))
     return (dispatch) => {
-        axios.get(`https://silk-travel.herokuapp.com/authe/email-verify/${code}/`, {
+        axios.get(`${link}authe/email-verify/${code}/`, {
             headers: {'AUTHORIZATION': `Bearer ${access}`}
         })
             .then(({data}) => {
@@ -256,7 +264,7 @@ export const deleteVerMessage =()=>({
 
 export const login =(data)=>{
     return(dispatch)=>{
-        axios.post(`https://silk-travel.herokuapp.com/authe/login/`, data)
+        axios.post(`http://silk-travel.herokuapp.com/ru/authe/login/`, data)
             .then(({data})=>{
                 console.log(data.user.message)
                 dispatch({type:LOGIN, data: data})
@@ -275,7 +283,7 @@ export const logoutUser =(payload)=>{
     let access = localStorage.getItem("ACCESS");
     access = access.slice(1, (access.length - 1))
     return(dispatch)=>{
-        axios.post(`https://silk-travel.herokuapp.com/authe/logout/`, payload, {
+        axios.post(`${link}authe/logout/`, payload, {
             headers: {'AUTHORIZATION': `Bearer ${access}`}
         })
             .then(({data})=>{
@@ -288,6 +296,27 @@ export const logoutUser =(payload)=>{
             })
     }
 
+};
+
+
+export const resetPassword =(email)=>{
+    let obj = {
+        "email": email
+    };
+    return(dispatch)=>{
+        axios.post(`${link}authe/request-reset-password-by-email/`, obj)
+            .then(({data})=>{
+                console.log(data)
+                // dispatch({type:LOGIN, data: data})
+                // dispatch(changeLoading());
+
+            })
+            .catch((e)=>{
+                console.log(e.message)
+                // dispatch(changeLoading());
+
+            })
+    }
 };
 
 

@@ -1,7 +1,7 @@
 import ru from './ru'
-import kg from './kg'
+import en from './eng'
 
 export default {
     ...ru,
-    ...kg
+    ...en
 }
